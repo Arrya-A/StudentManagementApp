@@ -17,14 +17,6 @@ function App() {
     setStudents(storedStudents);
   }, []);
 
-  useEffect(() => {
-    const storedStudents = JSON.parse(localStorage.getItem('students')) || []
-    setStudents(storedStudents)
-  }, [])
-
-
-
-
   // Save to local storage
   useEffect(() => {
     localStorage.setItem('students', JSON.stringify(students));
