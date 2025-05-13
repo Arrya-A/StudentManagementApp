@@ -24,39 +24,16 @@ function App() {
 
   // Add / Update
   const handleAddStudent = () => {
-    if (
-      nameInput.trim() === '' ||
-      markInput.trim() === '' ||
-      subjectInput.trim() === '' ||
-      dateInput === ''
-    ) {
+    if (nameInput.trim() === '' || markInput.trim() === '' || subjectInput.trim() === '' || dateInput === '') {
       setErrorMsg('Please fill in all fields before adding.');
       return;
     }
 
     if (editId !== null) {
-      setStudents(
-        students.map((student) =>
-          student.id === editId
-            ? {
-              ...student,
-              name: nameInput,
-              mark: markInput,
-              subject: subjectInput,
-              date: dateInput,
-            }
-            : student
-        )
-      );
+      setStudents(students.map((student) => student.id === editId ? { ...student, name: nameInput, mark: markInput, subject: subjectInput, date: dateInput, } : student));
       setEditId(null);
     } else {
-      const newStudent = {
-        id: Date.now(),
-        name: nameInput,
-        mark: markInput,
-        subject: subjectInput,
-        date: dateInput,
-      };
+      const newStudent = { id: Date.now(), name: nameInput, mark: markInput, subject: subjectInput, date: dateInput, };
       setStudents([...students, newStudent]);
     }
 
@@ -89,12 +66,7 @@ function App() {
 
   return (
     <>
-      <div
-        style={{
-          backgroundImage: 'linear-gradient(to right, lightblue, purple)',
-          height: '100vh',
-        }}
-      >
+      <div style={{ backgroundImage: 'linear-gradient(to right, lightblue, purple)', height: '100vh', }} >
         <div className="container">
           <div className="row justify-content-center">
             <div className="col-12 col-md-8 col-lg-6">
@@ -146,11 +118,7 @@ function App() {
                   </div>
 
                   {errorMsg && <div className="text-danger mb-2">{errorMsg}</div>}
-                  <button
-                    onClick={handleAddStudent}
-                    type="button"
-                    className="btn btn-primary w-100"
-                  >
+                  <button onClick={handleAddStudent} type="button" className="btn btn-primary w-100" >
                     {editId ? 'Update Entry' : 'Add Entry'}
                   </button>
                 </form>
@@ -174,7 +142,6 @@ function App() {
                 ) : (
                   filteredStudents.map((student, index) => (
 
-
                     <div key={student.id} className="d-flex align-items-center mb-2">
                       <h6>{index + 1}.</h6>
                       <div className="ms-3">
@@ -186,22 +153,14 @@ function App() {
                         <small>Date: {student.date}</small>
                       </div>
 
-                      <button
-                        onClick={() => handleEditStudent(student.id)}
-                        className="btn ms-auto fs-5"
-                      >
+                      <button onClick={() => handleEditStudent(student.id)} className="btn ms-auto fs-5" >
                         <i className="fa-solid fa-pen" style={{ color: 'blue' }}></i>
                       </button>
-                      <button
-                        onClick={() => handleDeleteStudent(student.id)}
-                        className="btn ms-2 fs-5"
-                      >
-                        <i
-                          className="fa-solid fa-square-xmark"
-                          style={{ color: 'red' }}
-                        ></i>
+                      <button onClick={() => handleDeleteStudent(student.id)} className="btn ms-2 fs-5" >
+                        <i className="fa-solid fa-square-xmark" style={{ color: 'red' }} ></i>
                       </button>
                     </div>
+                    
                   ))
                 )}
               </div>
